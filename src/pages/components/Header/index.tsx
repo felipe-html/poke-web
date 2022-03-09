@@ -1,7 +1,7 @@
 import styles from './styles.module.scss'
 import { BiSearchAlt } from 'react-icons/bi'
 
-export function Header() {
+export default function Header() {
     return (
         <header className={styles.container}>
             <nav className={styles.navigation}>
