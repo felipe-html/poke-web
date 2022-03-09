@@ -1,6 +1,7 @@
 :root{
   --primary: #ef5350;
   --text: #353535;
+  --background: #e2e2e2;
 }
 
 *{
@@ -12,8 +13,16 @@
 body{
   font-family: 'Poppins', sans-serif;
   color: var(--text);
+  background-color: var(--background);
 }
 
 input:focus{
   outline: 0;
+}
+
+main{
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

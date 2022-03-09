@@ -7,9 +7,9 @@ export default function Home() {
             <Head>
                 <title>Poke Web | Home</title>
             </Head>
+            <Header />
             <main>
-                <Header />
-
+                Página de listagem
             </main>
         </>
     )
