@@ -40,7 +40,7 @@ export default function PokeCard({ data }: CardDataProps) {
                     {
                         currentPokemon.types.map((item, key) => {
                             return (
-                                <p key={key}>{item.type.name}</p>
+                                <p key={key}>{item}</p>
                             )
                         }
                         )
