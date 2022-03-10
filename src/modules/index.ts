@@ -10,7 +10,7 @@ export interface PokeCardProps {
     url: string,
 }
 
-export type PokemonProps = {
+export interface PokemonProps {
     abilities: [
         ability: {
             name: string,
@@ -25,13 +25,15 @@ export type PokemonProps = {
         front_default: string
     },
     stats: PokeStatsProps[],
-    types: [
-        slot: number,
-        type: {
-            name: string,
-        },
-    ],
-    weight: number
+    weight: number,
+    types: PokemonTypeProps[],
+}
+
+export interface PokemonTypeProps {
+    slot: number,
+    type: {
+        name: string,
+    },
 }
 
 interface PokeStatsProps {
