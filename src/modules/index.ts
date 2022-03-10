@@ -10,7 +10,7 @@ export interface PokeCardProps {
     url: string,
 }
 
-export interface PokemonProps {
+export type PokemonProps = {
     abilities: [
         ability: {
             name: string,

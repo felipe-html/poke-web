@@ -2,8 +2,8 @@ import axios from "axios";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { PokePageProps } from "../../modules";
-import Header from "../components/Header";
-import PokeCard from "../components/PokeCard";
+import Header from "../../components/Header";
+import PokeCard from "../../components/PokeCard";
 
 import styles from './styles.module.scss';
 
