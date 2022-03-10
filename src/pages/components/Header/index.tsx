@@ -14,7 +14,7 @@ export default function Header() {
             <nav className={styles.navigation}>
                 <Link href='/home' passHref>
                     <h1 className={styles.logo}>
-                        Poke Web
+                        PokeWeb
                     </h1>
                 </Link>
                 <form className={styles.searchBar}>
