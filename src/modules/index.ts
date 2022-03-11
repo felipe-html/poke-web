@@ -11,11 +11,7 @@ export interface PokeCardProps {
 }
 
 export interface PokemonProps {
-    abilities: [
-        ability: {
-            name: string,
-        },
-    ],
+    abilities: PokemonAbilitiesProps[],
     id: number,
     name: string,
     species: {
@@ -36,7 +32,13 @@ export interface PokemonTypeProps {
     },
 }
 
-interface PokeStatsProps {
+export interface PokemonAbilitiesProps {
+    ability: {
+        name: string,
+    }
+}
+
+export interface PokeStatsProps {
     base_stat: number,
     stat: {
         name: string,

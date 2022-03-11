@@ -2,8 +2,10 @@ import axios, { AxiosError } from 'axios'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { PokeCardProps, PokemonProps, PokemonTypeProps } from '../../modules'
+import Link from 'next/link'
 
 import styles from './styles.module.scss'
+import { useRouter } from 'next/router'
 
 type CardDataProps = {
     data: PokeCardProps
@@ -11,6 +13,8 @@ type CardDataProps = {
 
 export default function PokeCard({ data }: CardDataProps) {
     const [currentPokemon, setCurrentPokemon] = useState<PokemonProps>()
+
+    const router = useRouter()
 
     async function getPokemon() {
         await axios.get(data.url)
@@ -26,12 +30,14 @@ export default function PokeCard({ data }: CardDataProps) {
         getPokemon()
     }, [])
 
-    return (
-        <article className={styles.container}>
+    function redirect() {
+        router.push(`/pokemon/${data.name}`)
+    }
 
+    return (
+        <article className={styles.container} onClick={redirect}>
             {
                 currentPokemon !== undefined ?
-
                     <>
                         <h1 className={styles.title}>{data.name[0].toUpperCase() + data.name.substring(1)}</h1>
                         <div className={styles.image}>
@@ -49,15 +55,11 @@ export default function PokeCard({ data }: CardDataProps) {
                             }
                         </section>
                     </>
-
                     :
                     <>
                         <div className={styles.loader} />
                     </>
             }
-
-
-
         </article>
     )
 }

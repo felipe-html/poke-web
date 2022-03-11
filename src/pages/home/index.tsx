@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { PokePageProps } from "../../modules";
 import Header from "../../components/Header";
 import PokeCard from "../../components/PokeCard";
+import Link from 'next/link';
 
 import styles from './styles.module.scss';
 
@@ -20,6 +21,7 @@ export default function Home() {
             })
 
     }, [])
+
 
     return (
         <>
@@ -39,6 +41,7 @@ export default function Home() {
                         ))
                     }
                 </div>
+                {/* <p>Show more</p> */}
             </main>
         </>
     )
