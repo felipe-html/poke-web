@@ -25,48 +25,29 @@ export default function Home() {
 
     }, [])
 
-    if (pokemons !== undefined) {
-        return (
-            <>
-                <Head>
-                    <title>Poke Web | Home</title>
-                </Head>
-                <Header />
-                <main className={styles.container}>
-                    <div className={styles.pokeCard}>
-                        {
-                            pokemons.results.map((pokemon, key) => (
-                                <PokeCard
-                                    key={key}
-                                    data={pokemon}
-                                />
-                            ))
-                        }
-                    </div>
-                    {/* <button>
+    return (
+        <>
+            <Head>
+                <title>Poke Web | Home</title>
+            </Head>
+            <Header />
+            <main className={styles.container}>
+                <div className={styles.pokeCard}>
+                    {
+                        pokemons !== undefined &&
+                        pokemons.results.map((pokemon, key) => (
+                            <PokeCard
+                                key={key}
+                                data={pokemon}
+                            />
+                        ))
+                    }
+                </div>
+                {/* <button>
                         Show more
                     </button> */}
-                </main>
-            </>
-        )
-    } else {
-        return (
-            <>
-                <Head>
-                    <title>Poke Web | Home</title>
-                </Head>
-                <Header />
-                <main className={styles.notFound}>
-                    <article className={styles.notFoundContainer}>
-                        <h1>Ops! No pokemons here.</h1>
-                        <section className={styles.imageContainer}>
-                            <div onClick={() => { setCurrentPokeball(!currentPokeball) }}>
-                                <Image src={currentPokeball ? '/images/pokeball-open.png' : '/images/pokeball.png'} alt='pokeball' width={120} height={160} />
-                            </div>
-                        </section>
-                    </article>
-                </main>
-            </>
-        )
-    }
+            </main>
+        </>
+    )
+
 }
