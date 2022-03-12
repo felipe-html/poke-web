@@ -14,7 +14,24 @@
     max-width: 1300px;
     display: flex;
     align-items: center;
-    justify-content: space-between
+    justify-content: space-between;
+}
+
+.menu{
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+    
+    p{
+        font-weight: bold;
+        transition: all 0.3s;
+
+        &:hover{
+            text-decoration: underline;
+            filter: opacity(0.8);
+            cursor: pointer;
+        }
+    }
 }
 
 .logo{
@@ -29,35 +46,7 @@
     }
 }
 
-.searchBar{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.input{
-    width: 400px;
-    padding: .5rem 1rem;
-    border-radius: 5px;
-    border: none;
-}
-
-.searchIcon{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 1rem;
-    transition: filter .3s;
-
-    svg{
-        color: var(--text);
-    }
-
-    &:hover{
-        cursor: pointer;
-        filter: opacity(0.8);
-    }
-}
 
 .mobileMenuIcon{
     display: none;
@@ -104,6 +93,9 @@
 }
 
 @media(max-width:700px){
+    .menu{
+        display: none;
+    }
     
     .searchBar{
         display: none;

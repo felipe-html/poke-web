@@ -1,0 +1,25 @@
+.notFoundContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.imageContainer{
+    margin-top: 1rem;
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.link{
+    font-weight: bold;
+    transition: color .3s;
+
+    &:hover{
+        cursor: pointer;
+        color: var(--primary);
+    }
+}

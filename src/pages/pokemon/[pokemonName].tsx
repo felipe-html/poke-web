@@ -11,6 +11,7 @@ import styles from './styles.module.scss'
 
 export default function Pokemon() {
     const [currentPokemon, setCurrentPokemon] = useState<PokemonProps>()
+    const [currentPokeball, setCurrentPokeball] = useState<boolean>(true)
     const router = useRouter()
 
     const pokemon = router.query.pokemonName
@@ -19,7 +20,6 @@ export default function Pokemon() {
         await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
             .then(response => {
                 setCurrentPokemon(response.data)
-                console.log(response.data)
             })
             .catch((error: AxiosError) => {
                 console.log(error.response)
@@ -28,7 +28,7 @@ export default function Pokemon() {
 
     useEffect(() => {
         getPokemon()
-    }, [])
+    }, [pokemon])
 
     return (
         <>
@@ -45,7 +45,7 @@ export default function Pokemon() {
                         <div className={styles.informations}>
                             <section className={styles.section}>
                                 <div className={styles.image}>
-                                    <Image src={currentPokemon.sprites.front_default} alt={currentPokemon.name} layout="fill" />
+                                    <Image src={currentPokemon.sprites.front_default} alt={currentPokemon.name} layout="fill" priority />
                                 </div>
                                 <p className={styles.title}>Types:</p>
                                 {

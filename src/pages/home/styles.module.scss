@@ -14,6 +14,29 @@
     grid-row-gap: 2rem;
 }
 
+.notFound{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notFoundContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.imageContainer{
+    margin-top: 1rem;
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+
 @media(max-width:1140px) {
     .pokeCard{
         grid-template-columns: 1fr 1fr 1fr ;

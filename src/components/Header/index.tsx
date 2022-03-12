@@ -1,4 +1,3 @@
-import { BiSearchAlt } from 'react-icons/bi'
 import { HiOutlineMenuAlt3 } from 'react-icons/hi'
 import { RiCloseLine } from 'react-icons/ri'
 import { useState } from 'react'
@@ -17,15 +16,14 @@ export default function Header() {
                         PokeWeb
                     </h1>
                 </Link>
-                <form className={styles.searchBar}>
-                    <label />
-                    <input type="text" placeholder="Pokémon's name" className={styles.input} />
-                    <div className={styles.searchIcon}>
-                        <Link href='/search' passHref>
-                            <BiSearchAlt size={30} />
-                        </Link>
-                    </div>
-                </form>
+                <div className={styles.menu}>
+                    <Link href='/home' passHref>
+                        <p>Home</p>
+                    </Link>
+                    <Link href='/search' passHref>
+                        <p>Search</p>
+                    </Link>
+                </div>
                 <div className={styles.mobileMenuIcon} onClick={() => { setMobileMenu(true) }}>
                     <HiOutlineMenuAlt3 size={30} />
                 </div>
