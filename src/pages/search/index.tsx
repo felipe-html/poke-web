@@ -16,12 +16,18 @@ export default function Search() {
     const [currentPokeball, setCurrentPokeball] = useState<boolean>(true)
 
     async function handleSearch() {
+
+        if (!search) {
+            return
+        }
+
         await axios.get(`https://pokeapi.co/api/v2/pokemon/${search}`)
             .then(response => {
                 setError(false)
                 setCurrentPokemon(response.data)
             })
             .catch((error: AxiosError) => {
+                setCurrentPokeball(true)
                 setCurrentPokemon(undefined)
                 setError(true)
             })
@@ -48,7 +54,7 @@ export default function Search() {
                     />
                     <div className={styles.searchIcon} onClick={() => { handleSearch() }}>
                         <Link href='/search' passHref>
-                            <BiSearchAlt size={30} />
+                            <BiSearchAlt size={22} />
                         </Link>
                     </div>
                 </div>
@@ -64,10 +70,10 @@ export default function Search() {
                         <h1>Ops! No pokemons here.</h1>
                         <section className={styles.imageContainer}>
                             <div id='pokeball' onClick={() => { setCurrentPokeball(!currentPokeball) }}>
-                                <Image src={currentPokeball ? '/images/pokeball-open.png' : '/images/pokeball.png'} alt='pokeball' width={120} height={160} />
+                                <Image src={currentPokeball ? '/images/pokeball.png' : '/images/pokeball-open.png'} alt='pokeball' width={120} height={160} />
                             </div>
                         </section>
-                        <p>Do not click on pokeball!</p>
+                        <p>Do not open pokeball!</p>
                     </article>
                 }
 

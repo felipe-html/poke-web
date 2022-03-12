@@ -17,6 +17,10 @@ body{
   overflow-y: scroll
 }
 
+html{
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 input:focus{
   outline: 0;
 }
