@@ -10,6 +10,7 @@
     justify-content: center;
     margin-bottom: 2rem;
     width: 100%;
+    max-width: 400px;
     padding: 0;
     position:relative;
 }
@@ -24,7 +25,6 @@
 
 .searchIcon{
     display: flex;
-    margin-left: 1rem;
     transition: filter .3s;
     position: absolute;
     right: 10px;
