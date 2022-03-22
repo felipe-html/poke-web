@@ -3,6 +3,7 @@
     border-radius: 10px;
     padding: 24px;
     width: 200px;
+    height:240px;
     box-shadow: -5px 5px 5px rgba(0,0,0,0.3);
     transition: all 0.3s;
     display: flex;
@@ -12,11 +13,13 @@
 
     &:hover{
         transform: scale(1.05);
+        cursor: pointer;
     }
 }
 
 .title{
     font-size: 1rem;
+    text-align: center;
 }
 
 .image{
@@ -25,8 +28,33 @@
     position: relative;
 }
 
+.typesContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .types{
     font-size: 1rem;
+    margin-bottom: .5rem;
+}
+
+.type{
+    text-align: center;
+    width: 7rem;
+    border-radius: 5px;
+
+    & + .type {
+        margin-top: .5rem;
+    }
+}
+
+.loaderContainer{
+    display: flex;
+    height:100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .loader {

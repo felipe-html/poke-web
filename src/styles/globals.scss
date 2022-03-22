@@ -31,3 +31,107 @@ main{
   align-items: center;
   justify-content: center;
 }
+
+.loader {
+  border: 2px solid white;
+  border-top: 2px solid gray; 
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  animation: spin 2s linear infinite;
+  position: absolute;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+//types
+.grass{
+  background-color: rgb(11, 214, 72);
+  color: white;
+}
+
+.fire{
+  background-color: rgb(243, 59, 59);
+  color: white;
+}
+
+.water{
+  background-color: rgb(0, 182, 238);
+  color: white;
+}
+
+.poison{
+  background-color: rgb(144, 96, 235);
+  color: white;
+}
+
+.flying{
+  background-color: rgb(125, 226, 240);
+  color: white;
+}
+
+.rock{
+  background-color: rgb(158, 158, 158);
+  color: white;
+}
+
+.bug{
+  background-color: rgb(9, 107, 47);
+  color: white;
+}
+
+.electric{
+  background-color: rgb(221, 218, 16);
+  // color: white;
+}
+
+.fairy{
+  background-color: rgb(234, 0, 255);
+  color: white;
+}
+
+.ground{
+  background-color: rgb(156, 93, 11);
+  color: white;
+}
+
+.normal{
+  border: solid .5px gray;
+}
+
+.fighting{
+  background-color: rgb(92, 240, 158);
+  color: white;
+}
+
+.psychic{
+  background-color: #818181;
+  color: white;
+}
+
+.steel{
+  background-color: rgb(54, 54, 54);
+  color: white;
+}
+
+.ice{
+  background-color: rgb(25, 120, 197);
+  color: white;
+}
+
+.ghost{
+  background-color: rgb(186, 207, 212);
+}
+
+.dark{
+  background-color: #b4b4b4;
+  color: white;
+}
+
+.dragon{
+  background-color: #ff7809;
+  color: white;
+}

@@ -49,12 +49,23 @@ export default function PokeCard({ data }: CardDataProps) {
                         <div className={styles.image}>
                             <Image src={image} onError={changeAlternativeImage} layout='fill' alt={currentPokemon.name} />
                         </div>
-                        <section>
-                            <h2 className={styles.types}>Types</h2>
+                        <section className={styles.typesContainer}>
+                            <h2 className={styles.types}>
+                                {currentPokemon.types.length === 1 ? 'Type' : 'Types'}
+                            </h2>
                             {
                                 currentPokemon.types.map((item: PokemonTypeProps, key) => {
                                     return (
-                                        <p key={key}>{item.type.name[0].toUpperCase() + item.type.name.substring(1)}</p>
+                                        <p
+                                            key={key}
+                                            className={`
+                                            ${styles.type} 
+                                            ${item.type.name}
+                                            `
+                                            }
+                                        >
+                                            {item.type.name[0].toUpperCase() + item.type.name.substring(1)}
+                                        </p>
                                     )
                                 }
                                 )
@@ -62,9 +73,9 @@ export default function PokeCard({ data }: CardDataProps) {
                         </section>
                     </>
                     :
-                    <>
-                        <div className={styles.loader} />
-                    </>
+                    <div className={styles.loaderContainer}>
+                        <div className="loader" />
+                    </div>
             }
         </article>
     )

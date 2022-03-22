@@ -21,6 +21,7 @@
     display: flex;
     width: 200px;
     justify-content: space-between;
+    color: white;
     
     p{
         font-weight: bold;
@@ -37,7 +38,7 @@
 .logo{
     font-size: 2rem;
     font-weight: bold;
-    color: var(--text);
+    color: white;
     transition: filter .3s;
 
     &:hover{

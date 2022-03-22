@@ -15,13 +15,21 @@ export default function Search() {
     const [search, setSearch] = useState<string>('')
     const [currentPokeball, setCurrentPokeball] = useState<boolean>(true)
 
+    const lowerCaseMask = (value: any) => {
+        return value.replace().toLowerCase()
+    }
+
     async function handleSearch() {
+
+        setCurrentPokemon(undefined)
 
         if (!search) {
             return
         }
 
-        await axios.get(`https://pokeapi.co/api/v2/pokemon/${search}`)
+        let value = search.toLowerCase()
+
+        await axios.get(`https://pokeapi.co/api/v2/pokemon/${value}`)
             .then(response => {
                 setError(false)
                 setCurrentPokemon(response.data)
@@ -46,7 +54,7 @@ export default function Search() {
                         type="text"
                         placeholder="Pokémon's name"
                         value={search}
-                        onChange={(e) => setSearch(e.currentTarget.value)}
+                        onChange={(e) => setSearch(lowerCaseMask(e.currentTarget.value))}
                         className={styles.input}
                         onKeyDown={(event) => {
                             event.key === 'Enter' && handleSearch()
