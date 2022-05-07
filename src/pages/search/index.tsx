@@ -1,45 +1,42 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Header from '../../components/Header'
-import { BiSearchAlt } from 'react-icons/bi'
 import styles from './styles.module.scss'
 import { useEffect, useState } from 'react'
 import { PokemonAbilitiesProps, PokemonProps, PokemonTypeProps, PokeStatsProps } from '../../modules'
 import Image from 'next/image'
 import axios, { AxiosError } from 'axios'
 import PokemonDetails from '../../components/PokemonDetails'
+import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next'
 
 export default function Search() {
-    const [currentPokemon, setCurrentPokemon] = useState<PokemonProps>()
-    const [error, setError] = useState<boolean>(false)
+    const [currentPokemon, setCurrentPokemon] = useState<PokemonProps | null>(null)
+    const [error, setError] = useState<boolean>(true)
     const [search, setSearch] = useState<string>('')
     const [currentPokeball, setCurrentPokeball] = useState<boolean>(true)
 
-    const lowerCaseMask = (value: any) => {
-        return value.replace().toLowerCase()
-    }
+    const router = useRouter()
 
-    async function handleSearch() {
 
-        setCurrentPokemon(undefined)
-
-        if (!search) {
-            return
-        }
-
-        let value = search.toLowerCase()
-
-        await axios.get(`https://pokeapi.co/api/v2/pokemon/${value}`)
+    async function getPokemon() {
+        setCurrentPokemon(null)
+        await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
             .then(response => {
                 setError(false)
+                console.log(response.data)
                 setCurrentPokemon(response.data)
             })
             .catch((error: AxiosError) => {
-                setCurrentPokeball(true)
-                setCurrentPokemon(undefined)
                 setError(true)
             })
     }
+
+    const pokemon = router.query.pokemon
+    useEffect(() => {
+        getPokemon()
+    }, [pokemon])
+
 
     return (
         <>
@@ -48,28 +45,9 @@ export default function Search() {
             </Head>
             <Header />
             <main className={styles.container}>
-                <div className={styles.searchBar}>
-                    <input
-                        id='searchInput'
-                        type="text"
-                        placeholder="Pokémon's name"
-                        value={search}
-                        onChange={(e) => setSearch(lowerCaseMask(e.currentTarget.value))}
-                        className={styles.input}
-                        onKeyDown={(event) => {
-                            event.key === 'Enter' && handleSearch()
-                        }}
-                    />
-                    <div className={styles.searchIcon} onClick={() => { handleSearch() }}>
-                        <Link href='/search' passHref>
-                            <BiSearchAlt size={22} />
-                        </Link>
-                    </div>
-                </div>
-
                 {
                     currentPokemon &&
-                    <PokemonDetails pokemonName={search} />
+                    <PokemonDetails pokemonId={currentPokemon && currentPokemon.id} />
                 }
 
                 {
@@ -89,4 +67,21 @@ export default function Search() {
 
         </>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+    try {
+        console.log(query)
+        return {
+            props: {
+
+            }
+        }
+    } catch (e) {
+        return {
+            props: {
+
+            }
+        }
+    }
 }

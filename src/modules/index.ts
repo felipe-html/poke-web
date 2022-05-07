@@ -8,6 +8,7 @@ export interface PokePageProps {
 export interface PokeCardProps {
     name: string,
     url: string,
+    id: number
 }
 
 export interface PokemonProps {

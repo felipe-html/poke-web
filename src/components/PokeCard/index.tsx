@@ -6,25 +6,19 @@ import Link from 'next/link'
 
 import styles from './styles.module.scss'
 import { useRouter } from 'next/router'
-
-type CardDataProps = {
+import { redirect } from 'next/dist/server/api-utils'
+interface PokeCardPageProps {
     data: PokeCardProps
 }
 
-export default function PokeCard({ data }: CardDataProps) {
+export default function PokeCard({ data }: PokeCardPageProps) {
+    const { id, name, url } = data
     const [currentPokemon, setCurrentPokemon] = useState<PokemonProps>()
-    const [image, setImage] = useState<string>('')
-
-    const router = useRouter()
 
     async function getPokemon() {
-        await axios.get(data.url)
+        await axios.get(url)
             .then(response => {
-                setImage(response.data.sprites.front_default)
                 setCurrentPokemon(response.data)
-            })
-            .catch((error: AxiosError) => {
-                console.log(error.response)
             })
     }
 
@@ -32,51 +26,44 @@ export default function PokeCard({ data }: CardDataProps) {
         getPokemon()
     }, [])
 
-    function redirect() {
-        router.push(`/pokemon/${data.name}`)
-    }
-
-    function changeAlternativeImage() {
-        setImage('/images/pikachu.png')
-    }
-
     return (
-        <article className={styles.container} onClick={redirect}>
-            {
-                currentPokemon !== undefined ?
-                    <>
-                        <h1 className={styles.title}>{data.name[0].toUpperCase() + data.name.substring(1)}</h1>
-                        <div className={styles.image}>
-                            <Image src={image} onError={changeAlternativeImage} layout='fill' alt={currentPokemon.name} />
-                        </div>
-                        <section className={styles.typesContainer}>
-                            <h2 className={styles.types}>
-                                {currentPokemon.types.length === 1 ? 'Type' : 'Types'}
-                            </h2>
-                            {
-                                currentPokemon.types.map((item: PokemonTypeProps, key) => {
-                                    return (
-                                        <p
-                                            key={key}
-                                            className={`
+        <Link href={`/pokemon/${id}`} passHref>
+            <article className={styles.container}>
+                <h1 className={styles.title}>{name[0].toUpperCase() + name.substring(1)}</h1>
+                <div className={styles.image}>
+                    <Image src={`https://cdn.traction.one/pokedex/pokemon/${id}.png`} layout='fill' alt={name} />
+                </div>
+
+                {currentPokemon ? (
+                    <section className={styles.typesContainer}>
+
+                        <h2 className={styles.types}>
+                            {currentPokemon.types.length === 1 ? 'Type' : 'Types'}
+                        </h2>
+                        {
+                            currentPokemon.types.map((item: PokemonTypeProps, key) => {
+                                return (
+                                    <p
+                                        key={key}
+                                        className={`
                                             ${styles.type} 
                                             ${item.type.name}
                                             `
-                                            }
-                                        >
-                                            {item.type.name[0].toUpperCase() + item.type.name.substring(1)}
-                                        </p>
-                                    )
-                                }
+                                        }
+                                    >
+                                        {item.type.name[0].toUpperCase() + item.type.name.substring(1)}
+                                    </p>
                                 )
                             }
-                        </section>
-                    </>
-                    :
+                            )
+                        }
+                    </section>) : (
                     <div className={styles.loaderContainer}>
                         <div className="loader" />
-                    </div>
-            }
-        </article>
+                    </div>)
+                }
+
+            </article>
+        </Link>
     )
 }

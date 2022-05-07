@@ -6,7 +6,7 @@ import Header from '../../components/Header'
 
 import styles from './styles.module.scss'
 
-export default function Pokemon() {
+export default function Pokemon404() {
     const [currentPokeball, setCurrentPokeball] = useState<boolean>(true)
 
     return (

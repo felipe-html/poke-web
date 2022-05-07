@@ -2,56 +2,58 @@
 import axios from "axios";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { PokePageProps } from "../../modules";
+import { PokeCardProps, PokePageProps } from "../../modules";
 import Header from "../../components/Header";
 import PokeCard from "../../components/PokeCard";
-import Link from 'next/link';
 
 import styles from './styles.module.scss';
-import Image from "next/image";
+import { api } from "../../services/api";
 
-export default function Home() {
-    const [pokemons, setPokemons] = useState<PokePageProps>()
-    const [currentPokeball, setCurrentPokeball] = useState<boolean>(true)
-    const [buttonLoading, setButtonLoading] = useState<boolean>(false)
 
+export default function Home({ count, next, previous, results }: PokePageProps) {
+
+    const [pokemons, setPokemons] = useState<PokeCardProps[]>([])
+    const [pokeDetails, setPokeDetails] = useState<PokePageProps>({} as PokePageProps)
     useEffect(() => {
-        getPokemons()
+        setPokemons(results)
+        setPokeDetails({
+            next,
+            previous,
+            count,
+            results
+        })
     }, [])
 
-    async function getPokemons() {
-        await axios.get(`https://pokeapi.co/api/v2/pokemon`)
-            .then(response => {
-                setPokemons(response.data)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    }
+    const [buttonLoading, setButtonLoading] = useState<boolean>(false)
 
     async function handleShowMorePokemons() {
         setButtonLoading(true)
 
-        await axios.get(pokemons?.next!)
-            .then(response => {
-                const data = response.data as PokePageProps
+        if (pokeDetails.next) {
+            await axios.get(pokeDetails.next)
+                .then(response => {
+                    const data = response.data as PokePageProps
 
-                const oldValue = [...pokemons?.results!]
+                    const oldValue = [...pokemons]
 
-                var newValue = oldValue.concat(data.results)
+                    var newValue = oldValue.concat(data.results)
 
-                setPokemons({
-                    ...data,
-                    next: data.next,
-                    results: newValue
+                    setPokemons(newValue)
+
+                    setPokeDetails({
+                        ...data,
+                        next: data.next,
+                        results: data.results
+                    })
                 })
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-            .finally(() =>
-                setButtonLoading(false)
-            )
+                .catch((error) => {
+                    console.log(error)
+                })
+                .finally(() =>
+                    setButtonLoading(false)
+                )
+        }
+
     }
 
     return (
@@ -61,45 +63,78 @@ export default function Home() {
             </Head>
             <Header />
             <main className={styles.container}>
-                {
-                    pokemons !== undefined ?
-                        <>
-                            <div className={styles.pokeCard}>
-                                {
-                                    pokemons.results.map((pokemon, key) => (
-                                        <PokeCard
-                                            key={key}
-                                            data={pokemon}
-                                        />
-                                    ))
-                                }
-                            </div>
+                <div className={styles.heroText}>
+                    <h1>PokeWeb is a website built with <a className={styles.nextLink} rel="noreferrer" href="https://nextjs.org" target={'_blank'}>NextJS</a>.</h1>
+                    <p>Select one to see the details, or just spend your time here :)</p>
+                </div>
+
+                {pokemons !== undefined ? (
+                    <>
+                        <div className={styles.pokeCard}>
                             {
-                                pokemons.next !== null &&
-                                <button className={styles.button} onClick={handleShowMorePokemons}>
-                                    {
-                                        buttonLoading ?
-                                            <>
-                                                <div className="loader" />
-                                            </>
-                                            :
-                                            <p>
-                                                Show more
-                                            </p>
-                                    }
-                                </button>
+                                pokemons.map((pokemon, key) => (
+                                    <PokeCard
+                                        key={key}
+                                        data={{ ...pokemon, id: key + 1 }}
+                                    />
+                                ))
                             }
-
-                        </>
-                        :
-                        <div className={styles.loading}>
-                            <p>Loading ...</p>
                         </div>
-                }
+                        {
+                            pokeDetails &&
+                            pokeDetails.next !== null &&
+                            <button className={styles.button} onClick={() => {
+                                handleShowMorePokemons()
+                            }}>
+                                {
+                                    buttonLoading ?
+                                        <>
+                                            <div className="loader" />
+                                        </>
+                                        :
+                                        <p>
+                                            Show more
+                                        </p>
+                                }
+                            </button>
+                        }
 
+                    </>) : (
+                    <div className={styles.loading}>
+                        <p>Loading ...</p>
+                    </div>)
+                }
 
             </main>
         </>
     )
+
+}
+
+export async function getStaticProps() {
+    try {
+        const pokemons = await api.get(``)
+            .then(response => { return response.data })
+
+        pokemons.results.forEach((pokemon: any, index: number) => {
+            pokemon.id = index + 1
+        })
+
+        return {
+            props: {
+                count: pokemons.count,
+                next: pokemons.next,
+                previous: null,
+                results: pokemons.results
+            }
+        }
+    } catch (e) {
+        return {
+            redirect: {
+                destination: '/400',
+                permanent: false
+            }
+        }
+    }
 
 }

@@ -1,31 +1,36 @@
-:root{
+:root {
   --primary: #ef5350;
   --text: #303030;
   --background: #f0f0f0;
 }
 
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-body{
+body {
   font-family: 'Poppins', sans-serif;
   color: var(--text);
   background-color: var(--background);
   overflow-y: scroll
 }
 
-html{
+html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-input:focus{
+a {
+  text-decoration: none;
+  color: var(--text);
+}
+
+input:focus {
   outline: 0;
 }
 
-main{
+main {
   padding: 4rem;
   display: flex;
   align-items: center;
@@ -34,7 +39,7 @@ main{
 
 .loader {
   border: 2px solid white;
-  border-top: 2px solid gray; 
+  border-top: 2px solid gray;
   border-radius: 50%;
   width: 15px;
   height: 15px;
@@ -43,95 +48,100 @@ main{
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 //types
-.grass{
+.grass {
   background-color: rgb(11, 214, 72);
   color: white;
 }
 
-.fire{
+.fire {
   background-color: rgb(243, 59, 59);
   color: white;
 }
 
-.water{
+.water {
   background-color: rgb(0, 182, 238);
   color: white;
 }
 
-.poison{
+.poison {
   background-color: rgb(144, 96, 235);
   color: white;
 }
 
-.flying{
+.flying {
   background-color: rgb(125, 226, 240);
   color: white;
 }
 
-.rock{
+.rock {
   background-color: rgb(158, 158, 158);
   color: white;
 }
 
-.bug{
+.bug {
   background-color: rgb(9, 107, 47);
   color: white;
 }
 
-.electric{
+.electric {
   background-color: rgb(221, 218, 16);
   // color: white;
 }
 
-.fairy{
+.fairy {
   background-color: rgb(234, 0, 255);
   color: white;
 }
 
-.ground{
+.ground {
   background-color: rgb(156, 93, 11);
   color: white;
 }
 
-.normal{
+.normal {
   border: solid .5px gray;
 }
 
-.fighting{
+.fighting {
   background-color: rgb(92, 240, 158);
   color: white;
 }
 
-.psychic{
+.psychic {
   background-color: #818181;
   color: white;
 }
 
-.steel{
+.steel {
   background-color: rgb(54, 54, 54);
   color: white;
 }
 
-.ice{
+.ice {
   background-color: rgb(25, 120, 197);
   color: white;
 }
 
-.ghost{
+.ghost {
   background-color: rgb(186, 207, 212);
 }
 
-.dark{
+.dark {
   background-color: #b4b4b4;
   color: white;
 }
 
-.dragon{
+.dragon {
   background-color: #ff7809;
   color: white;
 }

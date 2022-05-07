@@ -9,16 +9,16 @@ import { useRouter } from 'next/router'
 import styles from './styles.module.scss'
 
 interface PokemonDetailsProps {
-    pokemonName: string
+    pokemonId: number
 }
 
-export default function PokemonDetails({ pokemonName }: PokemonDetailsProps) {
+export default function PokemonDetails({ pokemonId }: PokemonDetailsProps) {
     const [currentPokemon, setCurrentPokemon] = useState<PokemonProps>()
     const [currentPokeball, setCurrentPokeball] = useState<boolean>(true)
     const router = useRouter()
 
     async function getPokemon() {
-        await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+        await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
             .then(response => {
                 setCurrentPokemon(response.data)
             })
@@ -34,15 +34,13 @@ export default function PokemonDetails({ pokemonName }: PokemonDetailsProps) {
     return (
 
         <main className={styles.container}>
-            {
-                currentPokemon !== undefined &&
+            {currentPokemon !== undefined && (
                 <article className={styles.content}>
                     <h1>{currentPokemon.name[0].toUpperCase() + currentPokemon.name.substring(1)}</h1>
-
                     <div className={styles.informations}>
                         <section className={styles.section}>
                             <div className={styles.image}>
-                                <Image src={currentPokemon.sprites.front_default} alt={currentPokemon.name} layout="fill" priority />
+                                <Image src={`https://cdn.traction.one/pokedex/pokemon/${pokemonId}.png`} alt={currentPokemon.name} layout="fill" priority />
                             </div>
                             <p className={styles.title}>Types:</p>
                             {
@@ -73,7 +71,7 @@ export default function PokemonDetails({ pokemonName }: PokemonDetailsProps) {
                             <p className={styles.title}>Weight: {currentPokemon.weight}</p>
                         </section>
                     </div>
-                </article>
+                </article>)
             }
         </main>
     )

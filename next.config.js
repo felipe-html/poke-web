@@ -1,8 +1,6 @@
-/** @type {import('next').NextConfig} */
-
 module.exports = {
   images: {
-    domains: ['raw.githubusercontent.com'],
+    domains: ['raw.githubusercontent.com', 'cdn.traction.one'],
   },
   reactStrictMode: true,
   async redirects() {
