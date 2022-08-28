@@ -1,0 +1,32 @@
+.container {
+    align-items: flex-start;
+    padding: 2rem 0;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--text);
+
+    h1 {
+        margin: 1rem 0;
+    }
+}
+
+.article {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 700px;
+    padding: 2rem 0;
+
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    &+.article {
+        border-top: solid 2px var(--dark-background);
+    }
+}

@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Header from '../../components/Header'
 import styles from './styles.module.scss'
 import { useEffect, useState } from 'react'
 import { PokemonAbilitiesProps, PokemonProps, PokemonTypeProps, PokeStatsProps } from '../../modules'
@@ -9,6 +8,7 @@ import axios, { AxiosError } from 'axios'
 import PokemonDetails from '../../components/PokemonDetails'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
+import { Header } from '../../components/Header'
 
 export default function Search() {
     const [currentPokemon, setCurrentPokemon] = useState<PokemonProps | null>(null)

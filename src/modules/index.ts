@@ -1,14 +1,16 @@
-export interface PokePageProps {
+export type PokePageProps = {
     count: number,
     next: string | null,
-    previous: string | null,
-    results: PokeCardProps[]
+}
+
+export type TypeProps = {
+    name: string,
+    url: string
 }
 
 export interface PokeCardProps {
     name: string,
     url: string,
-    id: number
 }
 
 export interface PokemonProps {

@@ -1,0 +1,28 @@
+.footer {
+    display: flex;
+    width: 100%;
+    background-color: var(--primary);
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 90vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.description {
+    h1 {
+        font-size: .9rem;
+        font-weight: normal;
+        color: var(--white-text);
+
+        a {
+            color: var(--white-text);
+        }
+    }
+}

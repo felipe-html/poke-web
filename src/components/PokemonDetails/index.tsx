@@ -2,7 +2,6 @@ import axios, { AxiosError } from 'axios'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import Header from '../../components/Header'
 import { PokemonAbilitiesProps, PokemonProps, PokeStatsProps, PokemonTypeProps } from '../../modules'
 import { useRouter } from 'next/router'
 

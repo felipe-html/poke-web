@@ -1,34 +1,56 @@
 .container {
-    border: none;
-    border-radius: 10px;
-    padding: 24px;
-    width: 200px;
-    height: 240px;
-    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s;
     display: flex;
     align-items: center;
-    flex-direction: column;
-    background-color: white;
+    justify-content: flex-end;
+    min-width: 200px;
+    min-height: 130px;
+    border-radius: 20px;
+    background-color: #f7f7f7;
+    color: var(--text);
+    transition-property: transform;
+    transition-property: box-shadow;
+    transition-duration: .2s;
+    padding: 0 1rem;
 
     &:hover {
         transform: scale(1.05);
+        box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.3);
         cursor: pointer;
     }
 }
 
-.title {
-    font-size: 1rem;
-    text-align: center;
+.skeleton {
+    display: flex;
+    width: 100%;
+    height: 100%;
 }
 
-.image {
+.content {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.cardContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+    font-size: .9rem;
+}
+
+.nextImage {
+    position: relative;
+    display: flex;
     width: 70px;
     height: 70px;
-    position: relative;
 
     img {
-        object-fit: contain;
+        position: absolute;
+        width: auto;
+        height: auto;
     }
 }
 
@@ -36,47 +58,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-}
+    gap: .2rem;
 
-.types {
-    font-size: 1rem;
-    margin-bottom: .5rem;
-}
-
-.type {
-    text-align: center;
-    width: 7rem;
-    border-radius: 5px;
-
-    &+.type {
-        margin-top: .5rem;
+    p {
+        display: flex;
+        background-color: #e3e3e3;
+        padding: 0 .5rem;
+        justify-content: center;
+        border-radius: 40px;
     }
 }
 
-.loaderContainer {
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.loader {
-    border: 5px solid var(--primary);
-    border-top: 5px solid var(--background);
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    animation: spin 2s linear infinite;
-    position: absolute;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
+@media(max-width:455px) {
+    .container {
+        width: 90vw;
+        max-width: 320px;
+        padding: 0 3rem;
     }
 }

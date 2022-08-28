@@ -2,7 +2,6 @@ import axios, { AxiosError } from "axios";
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Header from "../../components/Header";
 import {
   PokemonAbilitiesProps,
   PokemonProps,
@@ -13,6 +12,8 @@ import { useRouter } from "next/router";
 
 import styles from "./styles.module.scss";
 import { api } from "../../services/api";
+import { Header } from "../../components/Header";
+import { useToggle } from "../../hooks/useToggle";
 
 interface PokemonPageProps {
   pokemon: PokemonProps;
@@ -20,14 +21,14 @@ interface PokemonPageProps {
 
 export default function Pokemon({ pokemon }: PokemonPageProps) {
   const router = useRouter();
+  const { applicationMode } = useToggle()
 
   return (
     <>
       <Head>
         <title>Poke Web | Pokémon</title>
       </Head>
-      <Header />
-      <main className={styles.container}>
+      <main className={`main ${styles.container}`}>
         {router.isFallback ? (
           <>Loading...</>
         ) : (
@@ -41,7 +42,11 @@ export default function Pokemon({ pokemon }: PokemonPageProps) {
                 <section className={styles.section}>
                   <div className={styles.image}>
                     <Image
-                      src={`https://cdn.traction.one/pokedex/pokemon/${pokemon.id}.png`}
+                      src={
+                        applicationMode === 'default'
+                          ? `https://cdn.traction.one/pokedex/pokemon/${pokemon?.id}.png`
+                          : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon?.id}.png`
+                      }
                       alt={pokemon.name}
                       layout="fill"
                       priority
@@ -117,9 +122,13 @@ export async function getStaticProps({ params }: any) {
         pokemon,
       },
     };
+
   } catch (e) {
     return {
-      props: {},
+      redirect: {
+        destination: '/400',
+        permanent: false
+      }
     };
   }
 }

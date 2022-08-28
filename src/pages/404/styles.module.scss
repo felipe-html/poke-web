@@ -1,4 +1,4 @@
-.notFoundContainer{
+.notFoundContainer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,19 +6,19 @@
     text-align: center;
 }
 
-.imageContainer{
-    margin-top: 1rem;
+.imageContainer {
+    margin: 1rem 0;
 
-    &:hover{
+    &:hover {
         cursor: pointer;
     }
 }
 
-.link{
+.link {
     font-weight: bold;
     transition: color .3s;
 
-    &:hover{
+    &:hover {
         cursor: pointer;
         color: var(--primary);
     }
