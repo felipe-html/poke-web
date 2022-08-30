@@ -42,7 +42,6 @@ export default function Home({ count, next, results, types }: HomeProps) {
                     setButtonLoading(false)
                 )
         }
-        console.log(homePokemons.length)
     }
 
     return (

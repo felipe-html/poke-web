@@ -3,7 +3,11 @@ import { useLoading } from '../../hooks/useLoading'
 import { useToggle } from '../../hooks/useToggle'
 import styles from './styles.module.scss'
 
-export function Toggle() {
+interface ToggleProps {
+    onChange: () => void
+}
+
+export function Toggle({ onChange }: ToggleProps) {
     const { changeApplicationMode, applicationMode } = useToggle()
     const { setAppLoading } = useLoading()
     let currentMode = ''
@@ -13,6 +17,7 @@ export function Toggle() {
     }
 
     async function handleChangePictureMode() {
+        onChange()
         setAppLoading(true)
         changeApplicationMode()
         setTimeout(cancelLoading, 2500)

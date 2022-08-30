@@ -14,6 +14,7 @@ import styles from "./styles.module.scss";
 import { api } from "../../services/api";
 import { Header } from "../../components/Header";
 import { useToggle } from "../../hooks/useToggle";
+import { useLoading } from "../../hooks/useLoading";
 
 interface PokemonPageProps {
   pokemon: PokemonProps;
@@ -22,11 +23,20 @@ interface PokemonPageProps {
 export default function Pokemon({ pokemon }: PokemonPageProps) {
   const router = useRouter();
   const { applicationMode } = useToggle()
+  const { setAppLoading } = useLoading()
+
+  if (router.isFallback) {
+    setAppLoading(true)
+    return (
+      <>
+      </>
+    )
+  }
 
   return (
     <>
       <Head>
-        <title>Poke Web | Pokémon</title>
+        <title>Poke Web | {pokemon ? pokemon.name[0].toUpperCase() + pokemon.name.substring(1) : 'Pokemon'}</title>
       </Head>
       <main className={`main ${styles.container}`}>
         {router.isFallback ? (
@@ -83,7 +93,7 @@ export default function Pokemon({ pokemon }: PokemonPageProps) {
 
 export async function getStaticPaths() {
   try {
-    const allPokemons = await api.get("/?limit=1126").then((response) => {
+    const allPokemons = await api.get("/?limit=150").then((response) => {
       return response.data.results;
     });
 

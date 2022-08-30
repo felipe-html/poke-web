@@ -14,7 +14,7 @@ export default function Pokemon404() {
             <Head>
                 <title>Poke Web | Not found</title>
             </Head>
-            <main className={styles.container}>
+            <main className={`${styles.container} main`}>
                 <article className={styles.notFoundContainer}>
                     <h1>Ops! No pokemons here.</h1>
                     <div className={styles.imageContainer}>
@@ -23,6 +23,7 @@ export default function Pokemon404() {
                         </div>
                     </div>
                     <p>We didn't find any pokemon's here, but will keep trying.</p>
+                    <p>Tip: To find a pokemon, you need to enter the exact name, PokéApi only accepts it this way.</p>
                     <Link href='/home' passHref>
                         <p className={styles.link}>Go back to home</p>
                     </Link>

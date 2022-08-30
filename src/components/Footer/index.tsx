@@ -8,7 +8,7 @@ export function Footer() {
                 <div className={styles.description}>
                     <h1>
                         <a target='blank' href='https://github.com/felipe-html/poke-web.git'>thePokeweb </a>
-                        é um projeto aberto à comunidade.
+                        is an open source project
                     </h1>
                 </div>
             </section>
